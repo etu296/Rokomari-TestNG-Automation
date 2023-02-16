@@ -7,12 +7,11 @@ import java.util.List;
 
 public class LogIn extends SetUp {
     @Test(priority = 0 )
-    public void signUp()
+    public void signIn()
     {
         driver.get("https://www.rokomari.com/login/?");
 //        driver.findElement(By.xpath("//p[contains(text(),'Sign up')]")).click();
-        List<WebElement> signUpBtn = driver.findElements(By.className("js--login-form-btn"));
-        signUpBtn.get(0).click();
+
     }
 @Test (priority = 1)
 
@@ -40,9 +39,24 @@ public class LogIn extends SetUp {
       public void addToCart()
       {
          driver.get("https://www.rokomari.com/book/1346/porir-meye-megoboti");
-         driver.findElement(By.xpath("//body/div[6]/section[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/a[2]")).click();
-
+         WebElement goToCart = driver.findElement(By.cssSelector("div.container:nth-child(16) section.details-book-section:nth-child(2) div.row div.col-9 div.details-book-main-info-wrapper div.row.no-gutters div.col.details-book-main-info.align-self-center div.details-btn div.row.no-gutters div.col > a.btn.details-cart-btn.small-cart-button.js--goto-cart-btn:nth-child(2)"));
+         goToCart.sendKeys(Keys.ENTER);
       }
+
+      @Test(priority = 4)
+      public void viewCart()
+      {
+          List<WebElement> clickOnCart = driver.findElements(By.className("cart-menu"));
+          clickOnCart.get(0).sendKeys(Keys.ENTER);
+      }
+
+    @Test(priority = 5)
+    public void placeOrder()
+    {
+        WebElement placeOrder = driver.findElement(By.cssSelector("#js-continue-to-shipping"));
+        placeOrder.sendKeys(Keys.ENTER);
+    }
+
 //    public void fillUp()
 //    {
 //        List<WebElement> fullName = driver.findElements(By.className("form-control"));
